@@ -12,15 +12,16 @@ const Categories = ({ items, onClick }) => {
         >
           Все
         </li>
-        {items.map((name, index) => (
-          <li
-            onClick={() => setActiveCategory(index)}
-            className={activeCategory === index ? "active" : ""}
-            key={`${name}_${index}`}
-          >
-            {name}
-          </li>
-        ))}
+        {items &&
+          items.map((name, index) => (
+            <li
+              onClick={() => setActiveCategory(index)}
+              className={activeCategory === index ? "active" : ""}
+              key={`${name}_${index}`}
+            >
+              {name}
+            </li>
+          ))}
       </ul>
     </div>
   );
