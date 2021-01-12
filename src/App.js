@@ -1,64 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import axios from "axios";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { Header } from "./components";
 import { Home, Cart } from "./pages";
 
-import setPizzas from "./redux/actions/pizzas";
+import { setPizzas } from "./redux/actions/pizzas";
 
-// function App() {
-//   useEffect(() => {
-//     axios.get("http://localhost:3000/db.json").then(({ data }) => {
-//       setPizzas(data.pizzas);
-//     });
-//   }, []);
-//   return (
-//     <div className="wrapper">
-//       <Header />
-//       <div className="content">
-//         <Route exact render={() => <Home items={pizzas} />} path="/" />
-//         <Route exact component={Cart} path="/cart" />
-//       </div>
-//     </div>
-//   );
-// }
+const App = () => {
+  const dispatch = useDispatch();
 
-class App extends React.Component {
-  componentDidMount() {
-    axios.get("http://localhost:3000/db.json").then(({ data }) => {
-      this.props.setPizzas(data.pizzas);
+  React.useEffect(() => {
+    axios.get("http://localhost:3001/pizzas").then(({ data }) => {
+      dispatch(setPizzas(data));
     });
-  }
+  }, [dispatch]);
 
-  render() {
-    console.log(this.props);
-    return (
-      <div className="wrapper">
-        <Header />
-        <div className="content">
-          <Route
-            exact
-            render={() => <Home items={this.props.items} />}
-            path="/"
-          />
-          <Route exact component={Cart} path="/cart" />
-        </div>
+  return (
+    <div className="wrapper">
+      <Header />
+      <div className="content">
+        <Route exact component={Home} path="/" />
+        <Route exact component={Cart} path="/cart" />
       </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    items: state.pizzas.items,
-    filters: state.filters,
-  };
+    </div>
+  );
 };
 
-const mapDispatchToProps = {
-  setPizzas,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
