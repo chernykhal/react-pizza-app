@@ -21,7 +21,7 @@ const SortPopup = ({ items }) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.body.addEventListener("click", handleOutsideClick);
   }, []);
 
