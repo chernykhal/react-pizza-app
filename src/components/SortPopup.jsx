@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 const SortPopup = ({ items }) => {
-  const [visiblePopup, setVisiblePopup] = useState(false);
-  const [activeSort, setActiveSort] = useState(0);
-  const sortRef = useRef();
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
+  const [activeSort, setActiveSort] = React.useState(0);
+  const sortRef = React.useRef();
   const activeLabel = items[activeSort].name;
 
   const toggleVisiblePopup = () => {
