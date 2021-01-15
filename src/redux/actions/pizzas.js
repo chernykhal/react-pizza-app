@@ -6,7 +6,6 @@ export const setLoaded = (payload) => ({
 });
 
 export const fetchPizzas = (sortBy, category) => (dispatch) => {
-  console.log(sortBy, category);
   dispatch(setLoaded(false));
 
   axios
