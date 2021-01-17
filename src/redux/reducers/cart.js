@@ -32,7 +32,6 @@ const cart = (state = initialState, action) => {
           totalPrice: getTotalPrice(currentPizzaItems),
         },
       };
-      console.log(newItems);
       const totalCount = getTotalSum(newItems, "items.length");
       const totalPrice = getTotalSum(newItems, "totalPrice");
       return {
