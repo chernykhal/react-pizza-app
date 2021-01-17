@@ -7,21 +7,26 @@ const CartItem = ({
   name,
   type,
   size,
+  imageUrl,
   totalPrice,
   totalCount,
   onClickRemove,
+  onClickMinus,
+  onClickPlus,
 }) => {
   const handleRemoveClick = () => {
     onClickRemove(id);
   };
+  const handlePlusClick = () => {
+    onClickPlus(id);
+  };
+  const handleMinusClick = () => {
+    onClickMinus(id);
+  };
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img
-          className="pizza-block__image"
-          src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-          alt="Pizza"
-        />
+        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       </div>
       <div className="cart__item-info">
         <h3>{name}</h3>
@@ -30,7 +35,11 @@ const CartItem = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <Button
+          onClick={handleMinusClick}
+          className="button--circle cart__item-count-minus"
+          outline
+        >
           <svg
             width="10"
             height="10"
@@ -47,9 +56,13 @@ const CartItem = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
         <b>{totalCount}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <Button
+          onClick={handlePlusClick}
+          className="button--circle cart__item-count-plus"
+          outline
+        >
           <svg
             width="10"
             height="10"
@@ -66,7 +79,7 @@ const CartItem = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
       </div>
       <div className="cart__item-price">
         <b>{totalPrice} ₽</b>
@@ -98,9 +111,13 @@ const CartItem = ({
 CartItem.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
   totalPrice: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
+  onClickMinus: PropTypes.func.isRequired,
+  onClickPlus: PropTypes.func.isRequired,
+  onClickRemove: PropTypes.func.isRequired,
 };
 
 export default CartItem;

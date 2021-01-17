@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { CartItem } from "../components";
-import { clearCart, removeCartItem } from "../redux/actions/cart";
+import {
+  clearCart,
+  removeCartItem,
+  plusCartItem,
+  minusCartItem,
+} from "../redux/actions/cart";
 import cartEmptyImage from "../assets/img/empty-cart.png";
 
 const Cart = () => {
@@ -24,6 +29,12 @@ const Cart = () => {
     }
   };
 
+  const onPlusCartItem = (id) => {
+    dispatch(plusCartItem(id));
+  };
+  const onMinusCartItem = (id) => {
+    dispatch(minusCartItem(id));
+  };
   return (
     <div className="container container--cart">
       {totalCount ? (
@@ -110,10 +121,13 @@ const Cart = () => {
                   key={obj.id}
                   type={obj.type}
                   size={obj.size}
+                  imageUrl={obj.imageUrl}
                   name={obj.name}
                   totalPrice={items[obj.id].totalPrice}
                   totalCount={items[obj.id].items.length}
                   onClickRemove={onRemoveItem}
+                  onClickPlus={onPlusCartItem}
+                  onClickMinus={onMinusCartItem}
                 />
               ))}
           </div>
